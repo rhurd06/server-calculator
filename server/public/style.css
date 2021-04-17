@@ -1,0 +1,10 @@
+h1 {
+    background-color: slategrey;
+    color: aliceblue;
+}
+
+.numbers {
+    display: flex;
+    flex-direction: row;
+}
+
