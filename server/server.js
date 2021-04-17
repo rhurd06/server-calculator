@@ -9,29 +9,46 @@ app.use(express.static( 'server/public' ) );
 const bodyParser = require( 'body-parser' );
 app.use(bodyParser.urlencoded( { extended: true} ) );
 
-
-
+let newValues = [ ];
 let previousValues = [ ];
+let total = 0;
 
-function totalAdd(newValues){
-    let addSum += integer;
-    return addSum;
-}
+function chooseOperator(newValues){
+    console.log(newValues);
+    if (newValues.operator === 'add-values'){
+        newValues.operator = '+'; 
+        total = Number(newValues.integer1) + Number(newValues.integer2);
+    } else if( newValues.operator === 'subtract-values'){
+        newValues.operator = '-';
+        total = Number(newValues.integer1) - Number(newValues.integer2);
+    } else if( newValues.operator === 'multiply-values'){
+        newValues.operator = '*';
+        total = Number(newValues.integer1) * Number(newValues.integer2);
+    } else if( newValues.operator === 'divide-values'){
+        newValues.operator = '/';
+        total = Number(newValues.integer1) / Number(newValues.integer2)
+    }
+    console.log(total);
+    previousValues.push({
+        integer1: newValues.integer1,
+        integer2: newValues.integer2,
+        operator: newValues.operator,
+        total: total,
+    });
+}// end chooseOperator
+
+
 
 app.post('/values', (req, res) =>{
-    let newValues = req.body
+    newValues = req.body
     console.log('Received values', newValues);
-
-    //save it to array
-    previousValues.push(newValues);
+    chooseOperator(newValues);
     res.sendStatus(201);
 });
 
-// app.post('/', (req, res) =>{
-//     let totalAdd = req.body
-//     console.log('Adding values', totalAdd);
-
-// })
+app.get('/values', (req, res) => {
+    res.send(previousValues);
+});
 
 //tell server to listen on a port
 const PORT = 5000;

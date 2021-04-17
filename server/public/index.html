@@ -13,18 +13,20 @@
     <header><h1>Server Side Calculator</h1></header>
     <section>
         <input id="first-inputs" type="text" placeholder="first value"/>
-        <button id="add-values">+</button>
-        <button id="subtract-values">-</button>
-        <button id="multiply-values">*</button>
-        <button id="divide-values">/</button>
+    
+    <div class="ops-choices">
+        <button class="operator-choices" id="add-values">+</button>
+        <button class="operator-choices" id="subtract-values">-</button>
+        <button class="operator-choices" id="multiply-values">*</button>
+        <button class="operator-choices" id="divide-values">/</button>
+    </div>
         <input id="second-inputs" type="text" placeholder="second value"/>
         <button id="equal-button">=</button>
         <button id="clear-values">C</button>
-        <h2 id="total-sum">Total</h2>
+        <h2 id="total-sum">Total: <span id="value-total"></span></h2>
     </section>
     <section>
-        <ul>
-            <li></li>
+        <ul id="values">
         </ul>
     </section>
 </body>
