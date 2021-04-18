@@ -6,6 +6,7 @@ function onReady() {
     console.log('Hi from jQuery');
     $('#equal-button').on('click', inputValues );
     $('.operator-choices').on('click', choiceOfOperator);
+    getValues();
 };
 let operator = '';
 
@@ -45,9 +46,11 @@ function getValues(){
         url: '/values',
     })
     .then(function( response ){
-        //let oldValue =  response;
         console.log('Response from server', response );
+        $('#values-total').empty();
+        if( response.length > 0){
         render (response);
+        }
     })
     .catch( function( error ){
         console.log('Error from server', error );
@@ -58,7 +61,7 @@ function getValues(){
 
 function render(previousValues){
     $('#values').empty();
-    $('#value-total').append(` ${previousValues[previousValues.length-1].total}`);
+    $('#value-total').text(` ${previousValues[previousValues.length-1].total}`);
     for(let i= 0; i<previousValues.length; i++){
         //console.log(`${previousValues[i].integer1} ${previousValues[i].operator} ${previousValues[i].integer2}${previousValues[i].total}`);
         $('#values').append(`
